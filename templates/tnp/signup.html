@@ -1,0 +1,63 @@
+{% extends 'tnp/base.html' %}
+{% load static %} 
+
+{% block content %}
+
+
+
+<div class="container">
+<div class="col-14"> 
+
+    <!-- Default form register -->
+    <form class="text-center border border-light p-5" action="" method="POST" novalidate>
+    {% csrf_token %}
+        <p class="h4 mb-4">Sign up</p>
+
+        <div class="form-row mb-4">
+            <div class="col">
+                <!-- First name -->
+                {{form.first_name}}
+            </div>
+            <div class="col">
+                <!-- Last name -->
+                {{form.last_name}}
+            </div>
+        </div>
+
+        <div class="form-row mb-4">
+            <div class="col">
+                <!-- First name -->
+                {{form.email}}
+            </div>
+            <div class="col">
+                <!-- Last name -->
+                {{form.username}}
+            </div>
+            <div>
+                {{form.username.errors}}
+        </div>
+        </div>
+        
+
+        <div class="form-row mb-4">
+            <div class="col">
+                <!-- First name -->
+                {{form.password1.label_tag}} {{form.password1}} {{form.password1.errors}}
+            </div>
+            <div class="col">
+                <!-- Last name -->
+                {{form.password2.label_tag}} {{form.password2}} {{form.password2.errors}}
+            </div>
+        </div>
+
+        <!-- Sign up button -->
+        <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+
+    </form>
+
+</div>
+</div>
+
+<!-- Default form register -->
+
+{% endblock %}

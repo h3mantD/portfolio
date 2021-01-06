@@ -1,0 +1,22 @@
+{% extends 'tnp/base.html' %}
+{% load static %} 
+
+{% block content %}
+
+<div class="container">
+    <br><br><br>
+<center>
+    <div class="col-6">
+    <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {% for f in form %}
+    {{f.label_tag}} {{f}} {{f.errors | striptags}} <br><br>
+    {% endfor %}
+
+    <input type="submit" class="btn btn-info btn-block my-4" value="Submit">
+
+    </form>
+    </div>
+    </center>
+</div>
+{% endblock %}

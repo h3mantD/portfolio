@@ -1,0 +1,139 @@
+{% extends 'tnp/base.html' %}
+{% load static %} 
+
+
+
+{% block content %}
+<!-- col-sm-2 col-form-label -->
+
+<style>
+    label {
+        padding-top:calc(.375rem + 1px);
+        padding-bottom:calc(.375rem + 1px);
+        margin-bottom:0;
+        font-size:inherit;
+        line-height:1.5;
+
+        -webkit-box-flex:0;-ms-flex:0 0 16.666667%;flex:0 0 16.666667%;max-width:16.666667%;
+
+        position:relative;width:100%;min-height:1px;padding-right:15px;padding-left:15px;
+
+    }
+</style>
+
+<div class="container">
+    <center>
+<h1>welcome to portal</h1>
+
+
+<form action="" enctype="multipart/form-data"  method="post" novalidate>
+    {% csrf_token %}
+    <div style="margin-left: 22%;">  
+        <div class="form-group row">
+        
+        {{form.department.label_tag}}
+        <div class="col-6">
+            {{form.department}}
+        </div>
+        <div class="col-4">
+            {{form.department.errors}}
+        </div>
+       </div>
+       <div class="form-group row">
+        {{form.classis.label_tag}}
+        <div class="col-6">
+            {{form.classis}}
+        </div>
+        <div class="col-4">
+            {{form.classis.errors}}
+        </div>
+       </div>
+
+        <div class="form-group row">
+        {{form.roll_no.label_tag}}
+        <div class="col-6">
+            {{form.roll_no}}
+        </div>
+        <div class="col-4">
+            {{form.roll_no.errors}}
+        </div>
+       </div>       
+
+       <div class="form-group row">
+        {{form.tenth_marks.label_tag}}
+        <div class="col-6">
+            {{form.tenth_marks}}
+        </div>
+        <div class="col-4">
+            {{form.tenth_marks.errors}}
+        </div>
+       </div>
+       <div class="form-group row">
+        {{form.twelth_marks.label_tag}}
+        <div class="col-6">
+            {{form.twelth_marks}}
+        </div>
+        <div class="col-4">
+            {{form.twelth_marks.errors}}
+        </div>
+       </div>
+
+        <div class="form-group row">
+        {{form.degree_marks.label_tag}}
+        <div class="col-6">
+            {{form.degree_marks}}
+        </div>
+        <div class="col-4">
+            {{form.degree_marks.errors}}
+        </div>
+       </div>
+        <div class="form-group row">
+        {{form.live_back.label_tag}}
+        <div class="col-6">
+            {{form.live_back}}
+        </div>
+        <div class="col-4">
+            {{form.live_back.errors}}
+        </div>
+       </div>
+        <div class="form-group row">
+        {{form.add_info.label_tag}}
+        <div class="col-6">
+            {{form.add_info}}
+        </div>
+        <div class="col-4">
+            {{form.add_info.errors}}
+        </div>
+       </div>
+        <div class="form-group row">
+        {{form.resume.label_tag}}
+        {%if obj.resume.url%}
+        
+        <!-- name : resume -->
+        
+        <div class="col-4" id='re'>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="resume">
+        </div>
+        <div class="col-2">
+                <a href="{{obj.resume.url}}">resume link</a>
+        </div>
+        {% else %}
+
+        <div class="col-4" id='re'>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="resume" required>
+        </div>
+        {% endif %}
+
+        <div class="col-4">
+            {{form.resume.errors}}
+        </div>
+       </div>
+    </div>
+
+    <input type="submit" value="Submit">
+</form>
+</center>
+</div>
+<a href="logout">logout</a>
+
+{% endblock %}

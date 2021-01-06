@@ -1,0 +1,61 @@
+{% extends 'tnp/base.html' %}
+{% load static %} 
+
+{% block content %}
+<div class="container">
+<br><br><br><br>
+{% if user.is_authenticated %}
+ {% if user.is_superuser %}
+
+  <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Short List Students</h5>
+        <p class="card-text">get the list of students which are qulify for a upcomming company</p>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Short List</a>
+      </div>
+    </div>
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: red;">{{ message }}</p>
+    {% endfor %}
+</ul>
+{% endif %}
+<br><br>
+     <div class="card-body">
+    <h5 class="card-title">Previous companies data</h5>
+    <p class="card-text">{% for x in comp %} For [ <a href="{% url 'comp' x.cname %}" target="_blank" > {{x.cname}}  </a>] qualified {{x.selected_stud}} <br> {% endfor %}</p>
+  </div>
+</div>
+
+
+ {% else %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Update Your Profile</h5>
+        <p class="card-text">Have some new points to add in your profile then go ahead</p>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Update Profile</a>
+      </div>
+    </div>
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: red;">{{ message }}</p>
+    {% endfor %}
+</ul>
+{% endif %}
+<br><br>
+     <div class="card-body">
+    {% if comp %}
+    <h5 class="card-title">Companies that you are eligible</h5>
+    <p class="card-text">{% for x in comp %} {{x.cname}} {% endfor %}</p>
+    {% else %}
+    <h5 class="card-title">We are looking for companies that will match up with your profile</h5>
+    <p class="card-text">When any companies criteria gets match with your profile we will let you know soon</p>
+      {% endif %}
+  </div>
+</div>
+
+{% endif %}
+{% endif %}
+{% endblock %}

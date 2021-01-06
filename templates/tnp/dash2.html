@@ -1,0 +1,61 @@
+{% extends 'tnp/base.html' %}
+{% load static %} 
+
+{% block content %}
+<div class="container">
+<br><br><br><br>
+ {% if user.is_superuser %}
+
+  <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Company Criteria</h5>
+        <p class="card-text">
+          Company : {{criteria.cname}} <br>
+          10th Marks : {{criteria.tenth_marks}} <br>
+          12th Marks : {{criteria.twelth_marks}} <br>
+          Degree Marks : {{criteria.degree_marks}} <br>
+          live backlogs : {{criteria.live_back}} <br>
+          Total number of qualified students : {{criteria.selected_stud}} <br>
+          </p>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Change Criteria</a>
+      </div>
+    </div>
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: red;">{{ message }}</p>
+    {% endfor %}
+</ul>
+{% endif %}
+<br><br>
+     <div class="card-body">
+    <h5 class="card-title">Qualified students studid and usernames are</h5>
+    <p class="card-text">{% for x in studs %} {{x.studid}} {{x.s_username}} <br> {% endfor %}</p>
+  </div>
+</div>
+
+
+ {% else %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Update Your Profile</h5>
+        <p class="card-text">Have some new points to add in your profile then go ahead</p>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Update Profile</a>
+      </div>
+    </div>
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <p {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: red;">{{ message }}</p>
+    {% endfor %}
+</ul>
+{% endif %}
+<br><br>
+     <div class="card-body">
+    <h5 class="card-title">Companies that you are eligible</h5>
+    <p class="card-text">{% for x in comp %} {{x.cname}} {% endfor %}</p>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}

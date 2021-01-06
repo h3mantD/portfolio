@@ -1,0 +1,23 @@
+{% extends 'tnp/base.html' %}
+{% load static %} 
+
+{% block content %}
+<div class="container">
+    <br><br><br>
+<center>
+    {% if user.is_authenticated %}
+        {% if request.user.is_superuser %}
+        <h5>Go to the dashboard</h5>
+        <a href="{% url 'dash' %}" class="btn btn-primary"> DashBoard </a>
+        {% else %} 
+        <h5>Go to the dashboard to see more options</h5>
+        <a href="{% url 'dash' %}" class="btn btn-primary" > DashBoard  </a>
+        {% endif %}
+    {% else %} 
+        <h5>New to site? Register youself then</h5>
+        <a href="{% url 'signup' %}" class="btn btn-primary" > Signup  </a>
+    {% endif %}
+    
+</center>
+</div>
+{% endblock %}
