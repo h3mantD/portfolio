@@ -47,7 +47,7 @@ class signupForm(UserCreationForm):
         }
 
 class loginForm(AuthenticationForm):
-    
+
     class Meta:
 
         widget = {
@@ -67,8 +67,8 @@ class userdataForm(forms.ModelForm):
 
     class Meta:
         model = userdata
-        exclude = ['studid']
-        #fields = "__all__"
+        #exclude = ['studid']
+        fields = "__all__"
         labels = {
             'classis':'Class',
             'tenth_marks': '10th Percentage',
@@ -77,6 +77,7 @@ class userdataForm(forms.ModelForm):
             'live_back': 'Count of live backlogs'
         }
         widgets = {
+            'studid' : forms.HiddenInput(attrs={}),
             'department': forms.Select(attrs={'class':'form-control'}),
             'classis': forms.Select(attrs={'class':'form-control'}),
             'add_info': forms.Textarea(attrs={'class':'form-control'}),
@@ -84,6 +85,7 @@ class userdataForm(forms.ModelForm):
             'twelth_marks': forms.TextInput(attrs={'size':3, 'class' : 'form-control',}),
             'degree_marks': forms.TextInput(attrs={'size':4, 'class' : 'form-control',}),
             'live_back': forms.TextInput(attrs={'size':1, 'class' : 'form-control',}),
+            
         }
 
 class companyForm(forms.ModelForm):

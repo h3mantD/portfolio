@@ -112,20 +112,60 @@ def profile(request):
             if request.method == "POST":
                 form = userdataForm(request.POST, request.FILES)
                 #form2 = userdataForm(request.FILES)
-                print(form.errors)
+                #print(form)
                 if form.is_valid():
-                    form.save()
+                    data = form.cleaned_data
+                    if data['resume']:
+                        if str(data['resume']).endswith('.pdf'):
+                            form.save()
+                            messages.warning(request, 'Your information has been updated!!!')
+                            return render(request, 'tnp/dash.html')
+                        else:
+                            messages.warning(request, 'Please upload resume in pdf formaat')
+                            form = userdataForm(initial={
+                                'studid':request.user.id,
+                                'department':data['department'],
+                                'classis' : data['classis'],
+                                'roll_no' : data['roll_no'],
+                                'add_info' : data['add_info'],
+                                'tenth_marks':data['tenth_marks'],
+                                'twelth_marks':data['twelth_marks'],
+                                'degree_marks':data['degree_marks'],
+                                'live_back':data['live_back'],
+                                'add_info':data['add_info'],
+                            })
+                            return render(request, 'tnp/portal.html', {
+                                'form':form,
+                                'obj':obj,
+                                'link':1,
+                            })
+                    else:
+                        messages.warning(request, 'Please upload your resume.')
+                        form = userdataForm(initial={
+                                'studid':request.user.id,
+                                'department':data['department'],
+                                'classis' : data['classis'],
+                                'roll_no' : data['roll_no'],
+                                'add_info' : data['add_info'],
+                                'tenth_marks':data['tenth_marks'],
+                                'twelth_marks':data['twelth_marks'],
+                                'degree_marks':data['degree_marks'],
+                                'live_back':data['live_back'],
+                                'add_info':data['add_info'],
+                            })
+                        return render(request, 'tnp/portal.html', {
+                            'form':form,
+                            'obj':obj,
+                            'link':1,
+                        })
+                
                 else :
+                    print(form.errors['studid'])
                     return render(request, 'tnp/portal.html', {
                     'form':form,
                     'obj':obj,
                     'link':1,
                 })
-
-                messages.warning(request, 'Your information has been updated!!!')
-                return render(request, 'tnp/dash.html')
-
-                #return HttpResponse('<h1>data saved</h1>')
 
             else:
                 try:
@@ -154,7 +194,9 @@ def profile(request):
                     'link':1,
                 })
                 except (userdata.DoesNotExist):
-                    form = userdataForm()
+                    form = userdataForm(initial={
+                        'studid':request.user.id,
+                        })
                     obj = 0
         return render(request, 'tnp/portal.html', {
             'form':form,
@@ -164,12 +206,6 @@ def profile(request):
         #return HttpResponse("something wrong")
     else:
         return redirect('login')
-
-
-
-
-
-
 
 
 
@@ -291,3 +327,9 @@ def comp(request, slug):
         'criteria':criteria,
         'studs':studs,
     })
+
+
+#list all students in admin panel 
+def list_stud(request):
+    allstud = userdata.objects.all().values()
+    return render(request, 'tnp/test.html')

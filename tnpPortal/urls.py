@@ -14,7 +14,6 @@ urlpatterns = [
 
     path('dash', views.dash, name='dash'),
     path('profile', views.profile, name='profile'),
-    #path('profile', views.test, name='profile'),
     path('logout', views.logOut, name='logout'),
     path('admin/addcompany/logout', views.logOut, name='logout'),
     
@@ -27,4 +26,5 @@ urlpatterns = [
     path('admin/addcompany/', views.companydata, name='addcompany'),
 
     re_path(r'^''comp/(?P<slug>[\w@.-]+)', views.comp, name='comp'),
+    path('admin/students/', views.list_stud, name='list_stud'),
 ]
